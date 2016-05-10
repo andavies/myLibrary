@@ -1,0 +1,72 @@
+/**
+ * styles.css
+ *
+ * Computer Science 50
+ * Final Project
+ * Andrew Davies
+ *
+ * Global CSS.
+ */
+ 
+body
+{
+    background-color: #C7FBEA;
+}
+ 
+.container
+{
+    /* center contents */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#top 
+{
+    font-size:20px;
+    padding: 10px;
+}
+
+#middle .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+#bottom
+{
+    /* shrink bottom's font size */
+    font-size: smaller;
+
+    /* surround with whitespace */
+    margin: 20px;
+}
+
+#title>a
+{
+    font-size: 60px;
+    font-family: sans-serif;
+    color: blue;
+    text-decoration:none;
+}
+
+#menu>a
+{
+    padding-right: 100px;
+    padding-left: 30px;
+}
+
+#instructions
+{
+    font-family:serif;
+    font-size: 20px;
+    color: #0066ff;
+}
+
+td 
+{
+    padding:10px;
+}
