@@ -20,7 +20,10 @@
     // if 'post', find book
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $book = lookup($_POST["isbn"]);
+        // sanitise book input
+        $isbn = htmlspecialchars($_POST["isbn"], ENT_QUOTES);
+
+        $book = lookup($isbn);
         if ($book === false)
         {
             apologize("Unable to identify book, please check isbn number (omit all dashes or spaces)");    
