@@ -43,9 +43,16 @@
         {
             apologize("Your password confirmation did not match.");
         }
+
+        // sanitise inputs
+        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+        $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
+
+        // encrypt password
+        $password = crypt(password);
         
         // add user to database
-        $result = query("INSERT INTO users (username, hash) VALUES(?, ?)", $_POST["username"], crypt($_POST["password"]));
+        $result = query("INSERT INTO users (username, hash) VALUES(?, ?)", $username, $password);
         if ($result === false)
         {
             apologize("The username you entered already exists");

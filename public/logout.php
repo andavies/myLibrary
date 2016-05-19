@@ -16,6 +16,6 @@
     logout();
 
     // redirect user
-    redirect("/portfolio/projects/myBooks/public/");
+    redirect("/myLibrary/public/");
 
 ?>
