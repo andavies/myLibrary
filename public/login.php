@@ -32,8 +32,12 @@
             apologize("You must provide your password.");
         }
 
+        // sanitise inputs
+        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
+        $password = htmlspecialchars($_POST["password"], ENT_QUOTES);        
+
         // query database for user
-        $rows = query("SELECT * FROM users WHERE username = ?", $_POST["username"]);
+        $rows = query("SELECT * FROM users WHERE username = ?", $username);
 
         // if user found, check password
         if (count($rows) == 1)
@@ -42,7 +46,7 @@
             $row = $rows[0];
 
             // compare hash of user's input against hash in database
-            if (crypt($_POST["password"], $row["hash"]) == $row["hash"])
+            if (crypt($password, $row["hash"]) == $row["hash"])
             {
                 // remember that user's now logged in by storing user's ID in session
                 $_SESSION["id"] = $row["id"];
