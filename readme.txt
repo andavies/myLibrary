@@ -1,6 +1,6 @@
 ------------------------------------------
-CS50 Final Project
-'myLibrary' - a website that allows users to share and lend books in their local community
+'myLibrary' - a website that allows users to share and lend books in their local community  
+Originally my final project for the Harvard University course CS50 (cs50.harvard.edu)
 
 Andrew Davies
 submitted 15/12/15
