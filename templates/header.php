@@ -26,7 +26,7 @@
 
             <div id="top">
                 <div id="title">
-                    <a href="/">myLibrary</a>
+                    <a href="/myLibrary/public">myLibrary</a>
                 </div>
                 <div id="menu">
                     <a href="mybooks.php">myBooks</a>

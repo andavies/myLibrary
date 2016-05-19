@@ -1,8 +1,8 @@
             </div>
 
             <div id="bottom">
-                Copyright &#169; Andrew Davies, 2015 (1andydavies1@gmail.com)<br> courtesy of 
-                <a href="http://cs50.harvard.edu" target="_blank">cs50</a>
+                Made by Andy Davies, 2015<br>
+                Source code on <a href="https://github.com/andavies/myLibrary">Github</a> under an MIT licence
             </div>
             
             <div>
