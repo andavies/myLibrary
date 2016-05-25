@@ -70,17 +70,21 @@
             // access relevant data in stdClass Object
             $returndata = $data -> items[0] -> volumeInfo;
             
-            // error check: check $data contains the properties we want
-            // TODO: make this cleaner? Quick fix for now.
-            if (!isset($returndata -> title) || !isset($returndata -> authors[0])
-                || !isset($returndata -> imageLinks -> smallThumbnail) || !isset($returndata -> description))
+            // handle return data
+            
+            // if title, image or description not set, abandon ship
+            if (!isset($returndata -> title) || !isset($returndata -> description)
+                 || !isset($returndata -> imageLinks -> smallThumbnail))
             {
                 return false;  
             }
-            else
+            // if author not set, modify return
+            else if (!isset($returndata -> authors[0]))
             {
-                return $returndata;
+                $returndata -> authors[0] = "not listed";           
             }
+            
+            return $returndata;     
         }
     }
     
