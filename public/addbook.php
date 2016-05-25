@@ -23,6 +23,19 @@
         // sanitise book input
         $isbn = htmlspecialchars($_POST["isbn"], ENT_QUOTES);
 
+        // validate isbn format: check either 10 or 13 digits long
+        // https://en.wikipedia.org/wiki/International_Standard_Book_Number
+        if (!(strlen($isbn) === 10 || strlen($isbn) === 13))
+        {
+            apologize("Invalid ISBN number: must be 10 or 13 digits long");
+        }
+        
+        // check isbn contains only numbers
+        if(!ctype_digit($isbn))
+        {
+            apologize('ISBN number must contain numbers only');
+        }
+
         $book = lookup($isbn);
         if ($book === false)
         {
