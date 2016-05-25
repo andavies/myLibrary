@@ -13,6 +13,5 @@ TODO in next version:
 - better handle isbn format returned by googlebooks api (see lookup() in includes/functions.php)
 - fix bug in mybooks.php drop-down menu displaying twice when clicked twice
 
-TODO:
-- some redirects to '/' need to be changed to new localhost file structure (or just sort out the structure)
+
 
