@@ -60,16 +60,27 @@
         $json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q='.$isbn);
         $data = json_decode($json);
         
-        // error check (TODO more rigourous error checking?)
+        // error check: check something returned
         if ($data->totalItems == 0)
         {
             return false;
-        }
+        }        
         else
         {
             // access relevant data in stdClass Object
             $returndata = $data -> items[0] -> volumeInfo;
-            return $returndata;
+            
+            // error check: check $data contains the properties we want
+            // TODO: make this cleaner? Quick fix for now.
+            if (!isset($returndata -> title) || !isset($returndata -> authors[0])
+                || !isset($returndata -> imageLinks -> smallThumbnail) || !isset($returndata -> description))
+            {
+                return false;  
+            }
+            else
+            {
+                return $returndata;
+            }
         }
     }
     
