@@ -3,14 +3,14 @@
 Originally my final project for the Harvard University course CS50 (cs50.harvard.edu)
 
 Andrew Davies
-submitted 15/12/15
+originally submitted 15/12/15
 ------------------------------------------
 
 TODO in next version:
 
 - add ability to request books through the site (instead of user emailing manually)
 - add groups/regions so that the site can be used across different locations (see public/request.php)
-- better handle isbn format returned by googlebooks api (see lookup() in includes/functions.php)
+- some books not found on isbn search eg. "The Demolished Man 9781407239934" - why? 
 - fix bug in mybooks.php drop-down menu displaying twice when clicked twice
 
 
