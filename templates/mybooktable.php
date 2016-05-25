@@ -13,15 +13,14 @@
             <td><?= $row["author"] ?></td>
             <td><?= $row["availability"] ?></td>
             <td>
-                <form action="mybooks.php?<?=$row['id']?>" method="post">
-                    <input list="availability" name="availability" placeholder="change availability">
-                        <datalist id="availability" >
-                            <option value="available">
-                            <option value="on loan">
-                        </datalist>
+                <form action="mybooks.php?<?=$row['id']?>" method="post">              
+                    <select name="availability">
+                        <option value="available">available</option>
+                        <option value="on loan">on loan</option>
+                    </select>
             </td>
             <td>    
-                    <input type="submit">
+                    <input type="submit" value="change availability">
                 </form>
             </td>
             <td><form action="mybooks.php" method="post"><button name="delete" type="submit" value="<?= $row['id'] ?>">delete</button></form>
