@@ -19,6 +19,10 @@ BUGS:
 - json_decode() issue. For example The Dark Tower 9780340829752 is returned correctly by API but 
   json_decode() doesn't work. Why??
 
+UPDATE 25/05/16:
+
+Seems there may be an issue with the Google Books API not being maintained (https://productforums.google.com/forum/#!topic/books-api/R5DvlRh-EKo), which might scupper this project altogether!
+
 
 
 
