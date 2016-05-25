@@ -57,7 +57,7 @@
      */
     function lookup($isbn)
     {
-        $json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q='.$isbn);
+        $json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn);
         $data = json_decode($json);
         
         // error check: check something returned
