@@ -38,4 +38,5 @@ includes/constants.php
 .Spotlight-V100
 .Trashes
 ehthumbs.db
-Thumbs.db
+mylibrary.sublime-workspace
+mylibrary.sublime-project
