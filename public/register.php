@@ -1,52 +1,57 @@
 <?php
-    /** 
-     * register.php
-     *
-     * CS50
-     * Final Project
-     * Andrew Davies
-     *
-     * registers a new user account
-     */
-     
-    // configuration
+    
     require("../includes/config.php");
 
-    // if user reached page via GET (as by clicking a link or via redirect)
+    
     if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         // render form
         render("register_form.php", ["title" => "Register"]);
     }
 
-    // else if user reached page via POST (as by submitting a form via POST)
+
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        // validate submission
-        if (empty($_POST["username"]))
+        // for now, username is email
+
+        $filtered_input = array();
+
+        if    (empty($_POST["username"]) 
+            || empty($_POST["password"]) 
+            || empty($_POST["confirmation"]))
         {
-            apologize("You must provide your email address.");
+            apologize("You must complete all fields");
         }
         else if (filter_var($_POST["username"], FILTER_VALIDATE_EMAIL) === false)
         {
             apologize("you entered an invalid email address");
         }
-        else if (empty($_POST["password"]))
+        else if (strlen($_POST["password"]) < MIN_PASSWORD_LENGTH)
         {
-            apologize("You must provide your password.");
-        }
-        else if (empty($_POST["confirmation"]))
-        {
-            apologize("You must confirm your password.");
+            apologize("your password must be at least " 
+                      . MIN_PASSWORD_LENGTH 
+                      . " characters long");
         }
         else if ($_POST["password"] !== $_POST["confirmation"])
         {
             apologize("Your password confirmation did not match.");
+        } 
+        else 
+        {
+            $filtered_input['username'] = $_POST['username'];
+            $filtered_input['password'] = $_POST['password'];
         }
 
+        /* need to start organising into classes instead of all functions in one file*/
+
+        /* also, constants.php is on the gitignore because it has passwords. But I've now put MIN_PASSWORD.. constant in, which I'd like to be included. split into seperate files. CREATE AN ISSUE FOR THIS. START USING ISSUES. */
+
+
+        
+
         // sanitise inputs
-        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
-        $password = htmlspecialchars($_POST["password"], ENT_QUOTES);
+        $username = htmlspecialchars($filtered_input['username'], ENT_QUOTES);
+        $password = htmlspecialchars($filtered_input['password'], ENT_QUOTES);
 
         // encrypt password
         $password = crypt(password);
