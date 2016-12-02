@@ -1,14 +1,5 @@
 <?php
-    /** 
-     * login.php
-     *
-     * CS50
-     * Final Project
-     * Andrew Davies
-     *
-     * displays login page
-     */
-     
+    
     // configuration
     require("../includes/config.php"); 
 
@@ -22,31 +13,44 @@
     // else if user reached page via POST (as by submitting a form via POST)
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        // validate submission
-        if (empty($_POST["username"]))
+        // filter input
+        $filtered_input = array();
+        if (empty($_POST['username']) || empty($_POST['password']))
         {
-            apologize("You must provide your username (email address).");
+            apologize("Please complete both fields");
         }
-        else if (empty($_POST["password"]))
+        else if (filter_var($_POST["username"], FILTER_VALIDATE_EMAIL) === false)
         {
-            apologize("You must provide your password.");
+            apologize("You entered an invalid email address");
+        }
+        else
+        {
+            $filtered_input['username'] = $_POST['username'];
+            $filtered_input['password'] = $_POST['password'];
         }
 
-        // sanitise inputs
-        $username = htmlspecialchars($_POST["username"], ENT_QUOTES);
-        $password = htmlspecialchars($_POST["password"], ENT_QUOTES);        
+
+        // encrypt password
+        $encrypted_password = password_hash($filtered_input['password'], PASSWORD_DEFAULT);
+
+        // sanitise output to db
+        $sanitised_sql = array();
+        $sanitised_sql['username'] = mysqli_real_escape_string($filtered_input['username']);
+        $sanitised_sql['encrypted_password'] = mysqli_real_escape_string($encrypted_password);
+
+     
 
         // query database for user
-        $rows = query("SELECT * FROM users WHERE username = ?", $username);
+        $rows = query("SELECT * FROM users WHERE username = ?", $sanitised_sql['username']);
 
         // if user found, check password
-        if (count($rows) == 1)
+        if (count($rows) === 1)
         {
             // first (and only) row
             $row = $rows[0];
 
             // compare hash of user's input against hash in database
-            if (crypt($password, $row["hash"]) == $row["hash"])
+            if ($encrypted_password === $row["hash"])
             {
                 // remember that user's now logged in by storing user's ID in session
                 $_SESSION["id"] = $row["id"];
