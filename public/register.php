@@ -54,6 +54,7 @@
                         $filtered_input['encrypted_password']);
         if ($result === false)
         {
+            // NOTE: username must be set to 'unique' in db settings for this to work
             apologize("The username you entered already exists");
         }
         else
