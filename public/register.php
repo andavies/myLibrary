@@ -14,8 +14,8 @@
     {
         // for now, username is email
 
+        // filter input
         $filtered_input = array();
-
         if    (empty($_POST["username"]) 
             || empty($_POST["password"]) 
             || empty($_POST["confirmation"]))
@@ -42,20 +42,19 @@
             $filtered_input['password'] = $_POST['password'];
         }
 
-        /* also, constants.php is on the gitignore because it has passwords. But I've now put MIN_PASSWORD.. constant in, which I'd like to be included. split into seperate files. CREATE AN ISSUE FOR THIS. START USING ISSUES. */
-
-
         
-
-        // sanitise inputs
-        $username = htmlspecialchars($filtered_input['username'], ENT_QUOTES);
-        $password = htmlspecialchars($filtered_input['password'], ENT_QUOTES);
-
         // encrypt password
-        $password = crypt(password);
-        
+        $encrypted_password = password_hash($filtered_input['password'], PASSWORD_DEFAULT); 
+
+        // escape output before sending to db
+        $sanitised_sql = array();
+        $sanitised_sql['username'] = mysqli_real_escape_string($filtered_input['username']);
+        $sanitised_sql['encrypted_password'] = mysqli_real_escape_string($encrypted_password);
+
         // add user to database
-        $result = query("INSERT INTO users (username, hash) VALUES(?, ?)", $username, $password);
+        $result = query("INSERT INTO users (username, hash) VALUES(?, ?)", 
+                        $sanitised_sql['username'], 
+                        $sanitised_sql['encrypted_password']);
         if ($result === false)
         {
             apologize("The username you entered already exists");
