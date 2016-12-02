@@ -42,8 +42,6 @@
             $filtered_input['password'] = $_POST['password'];
         }
 
-        /* need to start organising into classes instead of all functions in one file*/
-
         /* also, constants.php is on the gitignore because it has passwords. But I've now put MIN_PASSWORD.. constant in, which I'd like to be included. split into seperate files. CREATE AN ISSUE FOR THIS. START USING ISSUES. */
 
 

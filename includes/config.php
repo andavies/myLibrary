@@ -7,6 +7,7 @@
     error_reporting(E_ALL);
 
     require("constants.php");
+    require("credentials.php");
     require("functions.php");
 
     session_start();

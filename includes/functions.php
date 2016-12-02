@@ -11,6 +11,7 @@
      */
 
     require_once("constants.php");
+    require_once("credentials.php");
 
     /**
      * Apologizes to user with message.
