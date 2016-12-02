@@ -44,17 +44,14 @@
 
         
         // encrypt password
-        $encrypted_password = password_hash($filtered_input['password'], PASSWORD_DEFAULT); 
+        $filtered_input['encrypted_password'] = password_hash($filtered_input['password'],                                                  PASSWORD_DEFAULT); 
 
-        // escape output before sending to db
-        $sanitised_sql = array();
-        $sanitised_sql['username'] = mysqli_real_escape_string($filtered_input['username']);
-        $sanitised_sql['encrypted_password'] = mysqli_real_escape_string($encrypted_password);
+        // (escaping output is handled by PDO in the query function)        
 
         // add user to database
         $result = query("INSERT INTO users (username, hash) VALUES(?, ?)", 
-                        $sanitised_sql['username'], 
-                        $sanitised_sql['encrypted_password']);
+                        $filtered_input['username'], 
+                        $filtered_input['encrypted_password']);
         if ($result === false)
         {
             apologize("The username you entered already exists");

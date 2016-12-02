@@ -1,15 +1,5 @@
 <?php
 
-    /**
-     * functions.php
-     *
-     * Computer Science 50
-     * Problem Set 7
-     * Andrew Davies
-     *
-     * Helper functions.
-     */
-
     require_once("constants.php");
     require_once("credentials.php");
 
@@ -99,7 +89,7 @@
         // SQL statement
         $sql = func_get_arg(0);
 
-        // parameters, if any
+        // parameters (if any)
         $parameters = array_slice(func_get_args(), 1);
 
         // try to connect to database
@@ -122,7 +112,9 @@
             }
         }
 
+
         // prepare SQL statement
+        // PDO:prepare() and PDOStatement::execute() handles escaping for us
         $statement = $handle->prepare($sql);
         if ($statement === false)
         {
