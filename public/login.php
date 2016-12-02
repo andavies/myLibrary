@@ -27,9 +27,6 @@
             $filtered_input['password'] = $_POST['password'];
         }
 
-        // encrypt password
-        $filtered_input['encrypted_password'] = password_hash($filtered_input['password'],                                                  PASSWORD_DEFAULT);
-
         // (escaping output is handled by PDO in the query function)
            
 
@@ -42,7 +39,7 @@
             // first (and only) row
             $row = $rows[0];
 
-            if ($filtered_input['encrypted_password'] === $row["hash"])
+            if (password_verify($filtered_input['password'], $row['hash']))
             {
                 $_SESSION["id"] = $row["id"];
 
