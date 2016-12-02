@@ -1,45 +1,39 @@
 <?php
-    /** 
-     * addbook.php
-     *
-     * CS50
-     * final project
-     * Andrew Davies
-     *
-     * displays +Book page
-     */
     
-    // configuration
     require("../includes/config.php");
+
     
-    // if 'get', display add book form
     if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         render("addbook_form.php", ["title" => "Add Books"]);
     }
-    // if 'post', find book
+
+
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        // sanitise book input
-        $isbn = htmlspecialchars($_POST["isbn"], ENT_QUOTES);
-
-        // validate isbn format: check either 10 or 13 digits long
-        // https://en.wikipedia.org/wiki/International_Standard_Book_Number
-        if (!(strlen($isbn) === 10 || strlen($isbn) === 13))
-        {
-            apologize("Invalid ISBN number: must be 10 or 13 digits long");
-        }
         
-        // check isbn contains only numbers
+        // filter input
+        $isbn = $_POST['isbn'];
+        $filtered_input = array();
         if(!ctype_digit($isbn))
         {
             apologize('ISBN number must contain numbers only');
         }
-
-        $book = lookup($isbn);
+        // https://en.wikipedia.org/wiki/International_Standard_Book_Number
+        else if (!(strlen($isbn) === 10 || strlen($isbn) === 13))
+        {
+            apologize("Invalid ISBN number: must be 10 or 13 digits long");
+        }
+        else
+        {
+            $filtered_input['isbn'] = $isbn;
+        }     
+        
+        
+        $book = lookup($filtered_input['isbn']);
         if ($book === false)
         {
-            apologize("Unable to identify book, please check isbn number (omit all dashes or spaces)");    
+            apologize("Unable to identify book, please check isbn number");    
         }
         else
         {
