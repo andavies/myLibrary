@@ -19,20 +19,8 @@
 
         if (!empty($_POST['isbn']))
         {
-            // TODO: repeated code. Refactor.
-            if(!ctype_digit($isbn))
-            {
-                apologize('ISBN number must contain numbers only');
-            }
-            // https://en.wikipedia.org/wiki/International_Standard_Book_Number
-            else if (!(strlen($isbn) === 10 || strlen($isbn) === 13))
-            {
-                apologize("Invalid ISBN number: must be 10 or 13 digits long");
-            }
-            else
-            {
-                $filtered_input['isbn'] = $isbn;
-            } 
+            $filtered_input['isbn'] = filter_isbn($isbn);
+             
 
             // TODO implement book_search() (rename?)
             $rows = book_search($filtered_input);

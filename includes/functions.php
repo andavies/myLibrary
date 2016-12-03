@@ -205,4 +205,24 @@
         }
     }
 
+    /**
+     * Filters isbn value submitted by the user
+     */
+    function filter_isbn($isbn)
+    {
+        if(!ctype_digit($isbn))
+        {
+            apologize('ISBN number must contain numbers only');
+        }
+        // https://en.wikipedia.org/wiki/International_Standard_Book_Number
+        else if (!(strlen($isbn) === 10 || strlen($isbn) === 13))
+        {
+            apologize("Invalid ISBN number: must be 10 or 13 digits long");
+        }
+        else
+        {
+            return $isbn;
+        }
+    }
+
 ?>
