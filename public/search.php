@@ -1,22 +1,17 @@
 <?php
-    /** 
-     * search.php
-     *
-     * CS50
-     * Final Project
-     * Andrew Davies
-     *
-     * allows user to search for books
-     */
-     
-    // config
+    
     require("../includes/config.php");
     
     // if GET select all books except user's
     if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
-        $rows = query("SELECT * FROM books WHERE ownerid!=?", $_SESSION["id"]);
+        // query function handles escaping
+        //$rows = query("SELECT * FROM books WHERE ownerid!=?", $_SESSION["id"]);
+
+        render('search_form.php');
     }
+
+
     // else if POST select books matching search
     else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -43,21 +38,23 @@
             // empty search, select all (except user's)
             $rows = query("SELECT * FROM books WHERE ownerid!=?", $_SESSION["id"]);
         }
-    }
+
+        // error check 
+        if ($rows === false)
+        {
+            apologize("something went wrong searching database");
+        }
+        // if no matches
+        else if (empty($rows))
+        {
+            apologize("no matches found");
+        }
+        // show results
+        else if (!empty($rows))
+        {
+            render("searchtable.php", ["rows" => $rows, "title" => "search"]);
+        }
+    }    
     
-    // error check 
-    if ($rows === false)
-    {
-        apologize("something went wrong searching database");
-    }
-    // if no matches
-    else if (empty($rows))
-    {
-        apologize("no matches found");
-    }
-    // show results
-    else if (!empty($rows))
-    {
-        render("searchtable.php", ["rows" => $rows, "title" => "search"]);
-    }
+    
 ?>
