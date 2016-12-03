@@ -28,11 +28,9 @@
 
         else if (!empty($_POST['title']) || !empty($_POST['author']))
         {
-            // TODO implement filter_title()
-            $filtered_input['title'] = filter_title($_POST['title']);
+            $filtered_input['title'] = filter_searchstr($_POST['title']);
 
-            // TODO implement filter_author (can these be the same??)
-            $filtered_input['author'] = filter_author($_POST['author']);
+            $filtered_input['author'] = filter_searchstr($_POST['author']);
 
             $rows = book_search($filtered_input);
         }

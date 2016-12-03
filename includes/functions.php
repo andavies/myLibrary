@@ -225,4 +225,21 @@
         }
     }
 
+
+    /**
+     * Filters a simple search string entered by the user
+     */
+    function filter_searchstr($title)
+    {
+        define("MAX_LENGTH", 50)
+        if (strlen($title) > MAX_LENGTH)
+        {
+            $title = substr($title, 0, MAX_LENGTH - 1);
+        }
+
+        return $title;
+    }
+
+
+
 ?>
