@@ -49,7 +49,7 @@
         }
         else
         {
-            render("searchtable.php", ["rows" => $rows, "title" => "search"]);
+            render("search_results.php", ["rows" => $rows, "title" => "search"]);
         }    
 
     }    
