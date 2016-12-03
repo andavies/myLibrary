@@ -231,7 +231,7 @@
      */
     function filter_searchstr($title)
     {
-        define("MAX_LENGTH", 50)
+        define("MAX_LENGTH", 50);
         if (strlen($title) > MAX_LENGTH)
         {
             $title = substr($title, 0, MAX_LENGTH - 1);
@@ -241,5 +241,43 @@
     }
 
 
+    /**
+     * Takes an array in form:
+       [
+            'isbn' => 'value',
+            'title' => 'value,
+            'author' => 'value'
+       ]
+     * returns array of rows from the DB
+     */
+    function book_search($search_array)
+    {
+        // note: escaping is handled by query()
+
+        $rows;
+
+        if ($search_array['isbn'] !== null)
+        {
+            $rows = query("SELECT * FROM books WHERE ownerid!=? AND isbn=?",
+                           $_SESSION["id"], $search_array['isbn']);
+        }
+        else if ($search_array['title'] !== null)
+        {
+            $rows = query("SELECT * FROM books WHERE ownerid!=? AND title LIKE ? ",
+                           $_SESSION["id"], '%'. $search_array['title'] .'%');
+        }
+        else if ($search_array['author'] !== null)
+        {
+            $rows = query("SELECT * FROM books WHERE ownerid!=? AND author LIKE ? ",
+                           $_SESSION["id"], '%'. $search_array['author'] .'%');
+        }
+        else
+        {
+            throw new Exception("all input fields are null");
+        }
+
+        return $rows;
+
+    }
 
 ?>

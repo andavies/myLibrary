@@ -1,7 +1,7 @@
 <?php
     
     // NOTE: ini_set only works if this code is executed. Set config in php.ini in production
-    ini_set("display_errors", "off");
+    //ini_set('display_errors', 'off');
     ini_set("log_errors", "on");
     ini_set("error_log", "/tmp/error_log.txt");
     error_reporting(E_ALL);
