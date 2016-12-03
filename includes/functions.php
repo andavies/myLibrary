@@ -48,35 +48,38 @@
      */
     function lookup($isbn)
     {
-        $json = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:'.$isbn);
-        $data = json_decode($json);
-        
-        // error check: check something returned
-        if ($data->totalItems == 0)
+        // isbn parameter passed has already been filtered by addbook.php
+        $filtered_input = array();
+        $filtered_input['isbn'] = $isbn;
+
+        $escaped_output = array();
+        $escaped_output['isbn'] = urlencode($filtered_input['isbn']);
+
+        $return_string = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:'
+                                  .$escaped_output['isbn']);
+        $json = json_decode($return_string);
+        $book = $json -> items[0] -> volumeInfo;
+
+        // json decode returns null if invalid json string passed
+        // count() returns 0 is passed null
+        if (count($json) == 0 || $json->totalItems == 0)
         {
             return false;
-        }        
-        else
-        {
-            // access relevant data in stdClass Object
-            $returndata = $data -> items[0] -> volumeInfo;
-            
-            // handle return data
-            
-            // if title, image or description not set, abandon ship
-            if (!isset($returndata -> title) || !isset($returndata -> description)
-                 || !isset($returndata -> imageLinks -> smallThumbnail))
-            {
-                return false;  
-            }
-            // if author not set, modify return
-            else if (!isset($returndata -> authors[0]))
-            {
-                $returndata -> authors[0] = "not listed";           
-            }
-            
-            return $returndata;     
         }
+        else if (!isset($book -> title) || !isset($book -> description)
+                 || !isset($book -> imageLinks -> smallThumbnail))
+        {
+            return false;
+        }
+        else if (!isset($book -> authors[0]))
+        {
+            $book -> authors[0] = "not listed";           
+        }
+        
+        $filtered_input['book_data'] = $book; 
+
+        return $filtered_input['book_data'];     
+        
     }
     
 
