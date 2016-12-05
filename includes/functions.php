@@ -26,11 +26,11 @@
         if (is_array($variable))
         {
             array_walk_recursive($variable, function(&$value){
-                $value = htmlentities($value, ENT_QUOTES);
+                $value = htmlentities($value, ENT_QUOTES, 'utf-8');
             });
         }
         else {
-            $variable = htmlentities($variable, ENT_QUOTES);
+            $variable = htmlentities($variable, ENT_QUOTES, 'utf-8');
         }
 
         require("../templates/dump.php");
@@ -222,7 +222,7 @@
             /* escape html in $values (which is potentially a multi-dimensional
                array, hence use of array_walk_recursive) */
             array_walk_recursive($values, function(&$value){
-                $value = htmlentities($value, ENT_QUOTES);
+                $value = htmlentities($value, ENT_QUOTES, 'utf-8');
             });
 
             // extract variables into local scope

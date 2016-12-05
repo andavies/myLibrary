@@ -3,6 +3,7 @@
 <html>
 
     <head>
+        <meta charset="UTF-8">
 
         <link href="/myLibrary/public/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="/myLibrary/public/css/bootstrap-theme.min.css" rel="stylesheet"/>
