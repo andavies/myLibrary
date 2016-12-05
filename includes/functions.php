@@ -18,6 +18,17 @@
      */
     function dump($variable)
     {
+        // escape html output
+        if (is_array($variable))
+        {
+            array_walk_recursive($variable, function(&$value){
+                $value = htmlentities($value);
+            });
+        }
+        else {
+            $variable = htmlentities($variable);
+        }
+
         require("../templates/dump.php");
         exit;
     }
