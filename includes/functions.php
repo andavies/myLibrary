@@ -3,6 +3,8 @@
     require_once("constants.php");
     require_once("credentials.php");
 
+    
+
     /**
      * Apologizes to user with message.
      */
@@ -11,6 +13,8 @@
         render("apology.php", ["message" => $message]);
         exit;
     }
+
+
 
     /**
      * Facilitates debugging by dumping contents of variable
@@ -33,6 +37,8 @@
         exit;
     }
 
+
+
     /**
      * Logs out current user, if any.  Based on Example #1 at
      * http://us.php.net/manual/en/function.session-destroy.php.
@@ -51,6 +57,8 @@
         // destroy session
         session_destroy();
     }
+
+
 
     /**
      * Lookup function to return book data from googlebooks api
@@ -92,6 +100,8 @@
         return $filtered_input['book_data'];     
         
     }
+
+
     
 
     /**
@@ -151,6 +161,8 @@
         }
     }
 
+
+
     /**
      * Redirects user to destination, which can be
      * a URL or a relative path on the local host.
@@ -187,6 +199,8 @@
         // exit immediately since we're redirecting anyway
         exit;
     }
+
+
 
     /**
      * Renders template, passing in values.
@@ -225,6 +239,8 @@
         }
     }
 
+
+
     /**
      * Filters isbn value submitted by the user
      */
@@ -246,6 +262,8 @@
     }
 
 
+
+
     /**
      * Filters a simple search string entered by the user
      */
@@ -258,6 +276,8 @@
 
         return $title;
     }
+
+    
 
 
     /**
