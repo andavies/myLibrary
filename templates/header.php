@@ -9,7 +9,7 @@
         <link href="/myLibrary/public/css/styles.css" rel="stylesheet"/>
 
         <?php if (isset($title)): ?>
-            <title>myLibrary: <?= htmlspecialchars($title) ?></title>
+            <title>myLibrary: <?= $title ?></title>
         <?php else: ?>
             <title>myLibrary</title>
         <?php endif ?>
