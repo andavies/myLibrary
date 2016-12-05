@@ -231,10 +231,9 @@
      */
     function filter_searchstr($title)
     {
-        define("MAX_LENGTH", 50);
-        if (strlen($title) > MAX_LENGTH)
+        if (strlen($title) > SEARCHSTR_MAXLEN)
         {
-            $title = substr($title, 0, MAX_LENGTH - 1);
+            $title = substr($title, 0, SEARCHSTR_MAXLEN - 1);
         }
 
         return $title;
