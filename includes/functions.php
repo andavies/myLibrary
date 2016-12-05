@@ -172,6 +172,12 @@
      */
     function redirect($destination)
     {
+        /* No need to escape string in location header
+           http://stackoverflow.com/questions/5677737/php-sanitize-user-data-for-use-in-header-function
+
+           No need to filter input to this function as the destination
+           is always hardcoded */
+
         // handle URL
         if (preg_match("/^https?:\/\//", $destination))
         {
@@ -277,7 +283,7 @@
         return $title;
     }
 
-    
+
 
 
     /**
