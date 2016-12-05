@@ -185,6 +185,15 @@
         // if template exists, render it
         if (file_exists("../templates/$template"))
         {
+            // don't throw away unescaped data
+            $unescaped_html = $values;
+
+            /* escape html in $values (which is potentially a multi-dimensional
+               array, hence use of array_walk_recursive) */
+            array_walk_recursive($values, function(&$value){
+                $value = htmlentities($value);
+            });
+
             // extract variables into local scope
             extract($values);
 
