@@ -16,8 +16,9 @@
         $filtered_input['isbn'] = filter_isbn($_POST['isbn']);            
         
         
-        $book = lookup($filtered_input['isbn']);
-        if ($book === false)
+        //$book = lookup($filtered_input['isbn']);
+        $filtered_input['book'] = lookup($filtered_input['isbn']);
+        if ($filtered_input['book'] === false)
         {
             apologize("Unable to identify book, please check isbn number");    
         }
@@ -30,8 +31,13 @@
             // add book to database
             $addbook = query("INSERT INTO books (isbn, title, author, ownername, ownerid, thumb, description) 
                               VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                              $_POST["isbn"], $book -> title, $book -> authors[0], $username, $_SESSION["id"], 
-                              $book -> imageLinks -> smallThumbnail, $book -> description);
+                              $_POST["isbn"], 
+                              $filtered_input['book'] -> title, 
+                              $filtered_input['book'] -> authors[0], 
+                              $username, 
+                              $_SESSION["id"], 
+                              $filtered_input['book'] -> imageLinks -> smallThumbnail, 
+                              $filtered_input['book'] -> description);
             
             // error check
             if ($addbook === false)
@@ -40,7 +46,7 @@
             }
                                 
             // render confirmation screen
-            render("confirm.php", ["book" => $book, "title" => "confirm"]);
+            render("confirm.php", ["book" => $filtered_input['book'], "title" => "confirm"]);
         }
     }
 ?>
