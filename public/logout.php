@@ -16,6 +16,6 @@
     logout();
 
     // redirect user
-    redirect("/myLibrary/public/");
+    redirect("/public/");
 
 ?>

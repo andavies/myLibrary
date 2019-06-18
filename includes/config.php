@@ -13,7 +13,7 @@
     session_start();
 
     // require authentication for all pages except /login.php, /logout.php, and /register.php
-    if (!in_array($_SERVER["PHP_SELF"], ["/myLibrary/public/login.php", "/myLibrary/public/logout.php", "/myLibrary/public/register.php"]))
+    if (!in_array($_SERVER["PHP_SELF"], ["/public/login.php", "/public/logout.php", "/public/register.php"]))
     {
         if (empty($_SESSION["id"]))
         {

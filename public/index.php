@@ -8,7 +8,7 @@
      *
      * displays home page
      */
-     
+
     // configuration
     require("../includes/config.php"); 
     

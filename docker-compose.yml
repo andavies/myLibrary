@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  webserver:
+    build: ./webserver
+    image: php-apache
+    ports:
+      - "8080:80"
+      - "443:443"
+    volumes:
+      - ./public:/var/www/html/public
+      - ./includes:/var/www/html/includes
+      - ./templates:/var/www/html/templates
+    links:
+      - db
+
+  db:
+    build: ./db
+    image: mysql
+    ports: 
+      - "3306:3306"
+    volumes:
+      - ./db-persistence:/var/lib/mysql    

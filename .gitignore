@@ -1,5 +1,7 @@
 includes/credentials.php
 
+db-persistence/*
+
 # below taken from https://gist.github.com/octocat/9257657
 
 # Compiled source #

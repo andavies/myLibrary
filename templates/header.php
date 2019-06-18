@@ -5,9 +5,9 @@
     <head>
         <meta charset="UTF-8">
 
-        <link href="/myLibrary/public/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="/myLibrary/public/css/bootstrap-theme.min.css" rel="stylesheet"/>
-        <link href="/myLibrary/public/css/styles.css" rel="stylesheet"/>
+        <link href="/public/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/public/css/bootstrap-theme.min.css" rel="stylesheet"/>
+        <link href="/public/css/styles.css" rel="stylesheet"/>
 
         <?php if (isset($title)): ?>
             <title>myLibrary: <?= $title ?></title>
@@ -15,9 +15,9 @@
             <title>myLibrary</title>
         <?php endif ?>
 
-        <script src="/myLibrary/public/js/jquery-1.11.1.min.js"></script>
-        <script src="/myLibrary/public/js/bootstrap.min.js"></script>
-        <script src="/myLibrary/public/js/scripts.js"></script>
+        <script src="/public/js/jquery-1.11.1.min.js"></script>
+        <script src="/public/js/bootstrap.min.js"></script>
+        <script src="/public/js/scripts.js"></script>
 
     </head>
 
@@ -27,7 +27,7 @@
 
             <div id="top">
                 <div id="title">
-                    <a href="/myLibrary/public">myLibrary</a>
+                    <a href="/public">myLibrary</a>
                 </div>
                 <div id="menu">
                     <a href="mybooks.php">myBooks</a>
