@@ -15,5 +15,6 @@ CREATE TABLE IF NOT EXISTS `books` (
   `ownerid` int(10),
   `thumb` varchar(255),
   `description` varchar(1023),
+  `availability` varchar(255),
   PRIMARY KEY (`id`)
 );
