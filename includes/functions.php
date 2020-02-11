@@ -76,8 +76,7 @@
 
         $return_string = file_get_contents('https://www.googleapis.com/books/v1/volumes?q=isbn:'
                                   .$escaped_output['isbn']);
-        $json = json_decode($return_string);
-        $book = $json -> items[0] -> volumeInfo;
+        $json = json_decode($return_string);        
 
         // json decode returns null if invalid json string passed
         // count() returns 0 is passed null
@@ -85,7 +84,10 @@
         {
             return false;
         }
-        else if (!isset($book -> title) || !isset($book -> description)
+
+        $book = $json -> items[0] -> volumeInfo;
+
+        if (!isset($book -> title) || !isset($book -> description)
                  || !isset($book -> imageLinks -> smallThumbnail))
         {
             return false;
